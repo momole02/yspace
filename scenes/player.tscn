@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://co6bprrss7fkl"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_f5plu"]
+[ext_resource type="Texture2D" uid="uid://ck86a2hp0jsk0" path="res://ships/player/player.png" id="1_pbnmw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cihdq"]
+radius = 5.0
+height = 20.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_f5plu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cihdq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pbnmw")
+hframes = 5
+vframes = 2
+frame = 2
+
+[node name="HFrameTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="VFrameTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="HFrameTimer" to="." method="_on_h_frame_timer_timeout"]
+[connection signal="timeout" from="VFrameTimer" to="." method="_on_v_frame_timer_timeout"]
