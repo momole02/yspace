@@ -1,9 +1,12 @@
 extends Area2D
 
+signal killed
 
 @export var player_position = Vector2(0,0)
 
 # var bullet = preload("res://scenes/bullet.tscn")
+
+var explosion = preload("res://scenes/explosion.tscn")
 
 var direction = Vector2(0,1)
 var speed = 50
@@ -18,3 +21,10 @@ func _on_shoot_timer_timeout():
 	pass
 #	var node = bullet.instantiate()
 #	get_parent().add_child(node)
+
+func _on_area_entered(area):
+	queue_free()
+	var exp = explosion.instantiate()
+	exp.global_position = global_position
+	get_parent().add_child(exp)
+	killed.emit()

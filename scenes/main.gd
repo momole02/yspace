@@ -16,8 +16,9 @@ const 	enemy_medium_gen_min_secs = 3
 
 var		enemy_small_gen_ticks = 0
 var 	enemy_small_gen_time = 0
-const 	enemy_small_gen_max_secs = 5
-const 	enemy_small_gen_min_secs = 2
+const 	enemy_small_gen_max_secs = 2
+const 	enemy_small_gen_min_secs = 0.5
+
 
 func _ready():
 	get_window().size = Vector2i(512, 512)
@@ -36,7 +37,7 @@ func handle_gen_enemy_big(delta):
 		
 func generate_enemy_big():
 	var node = enemy_big_scene.instantiate()
-	node.position.x = $Player.position.x + randi_range(-10,10)
+	node.position.x = randi() % (512-20)
 	node.position.y = -10
 	add_child(node)
 	enemy_big_gen_time = randi_range(enemy_big_gen_min_secs, enemy_big_gen_max_secs)
@@ -50,7 +51,7 @@ func handle_gen_enemy_medium(delta):
 
 func generate_enemy_medium():
 	var node = enemy_medium_scene.instantiate()
-	node.position.x = $Player.position.x + randi_range(-10, 10)
+	node.position.x = randi() % (512-20)
 	node.position.y = -10
 	add_child(node)
 	enemy_medium_gen_time = randi_range(enemy_medium_gen_min_secs , enemy_medium_gen_max_secs)
@@ -64,7 +65,7 @@ func handle_gen_enemy_small(delta):
 
 func generate_enemy_small():
 	var node = enemy_small_scene.instantiate()
-	node.position.x = $Player.position.x + randi_range(-10, 10)
+	node.position.x = randi() % (512-20)
 	node.position.y = -1
 	add_child(node)
 	enemy_small_gen_time = randi_range(enemy_small_gen_min_secs, enemy_small_gen_max_secs)
