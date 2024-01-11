@@ -27,5 +27,10 @@ autostart = true
 wait_time = 0.5
 autostart = true
 
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="timeout" from="HFrameTimer" to="." method="_on_h_frame_timer_timeout"]
 [connection signal="timeout" from="VFrameTimer" to="." method="_on_v_frame_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

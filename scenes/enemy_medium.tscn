@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://vkmpgg7reenq"]
+
+[ext_resource type="Texture2D" uid="uid://cvoms2vs0vxt4" path="res://ships/enemies/enemy-medium.png" id="1_ix2cx"]
+[ext_resource type="Script" path="res://scenes/enemy_medium.gd" id="1_m4fwe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0mtx"]
+radius = 6.01497
+height = 26.0282
+
+[sub_resource type="Animation" id="Animation_k1yvr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_atv1l"]
+resource_name = "moving"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2yix"]
+_data = {
+"RESET": SubResource("Animation_k1yvr"),
+"moving": SubResource("Animation_atv1l")
+}
+
+[node name="EnemyMedium" type="Area2D"]
+script = ExtResource("1_m4fwe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ix2cx")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.55509
+shape = SubResource("CapsuleShape2D_n0mtx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c2yix")
+}

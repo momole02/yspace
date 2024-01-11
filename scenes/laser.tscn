@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://e50s85wb7utr"]
+
+[ext_resource type="Script" path="res://scenes/laser.gd" id="1_ybwni"]
+[ext_resource type="Texture2D" uid="uid://dyuvgenbcuty1" path="res://effects/shoot/laser-bolts.png" id="2_d53tq"]
+
+[sub_resource type="Animation" id="Animation_s57dw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_5l3pk"]
+resource_name = "shooting"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvxte"]
+_data = {
+"RESET": SubResource("Animation_s57dw"),
+"shooting": SubResource("Animation_5l3pk")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gf6j2"]
+radius = 3.0
+height = 14.0
+
+[node name="Laser" type="Area2D"]
+script = ExtResource("1_ybwni")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d53tq")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wvxte")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gf6j2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

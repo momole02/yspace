@@ -1,10 +1,9 @@
 extends Node2D
 
-var scroll_speed = 50 
+var scroll_speed = 25
 
 func _ready():
 	$Sprite2D.region_rect.position.y = 256
-	print($Sprite2D.region_rect)
 	
 func _process(delta):
 	var scroll_y = $Sprite2D.region_rect.position.y - scroll_speed * delta

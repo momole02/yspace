@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bko0n0nl7a646"]
 
 [ext_resource type="Script" path="res://scenes/background.gd" id="1_3n6w3"]
-[ext_resource type="Texture2D" uid="uid://dwc8umriym4q4" path="res://backgrounds/desert-backgorund-looped.png" id="1_tqr0m"]
+[ext_resource type="Texture2D" uid="uid://dwc8umriym4q4" path="res://backgrounds/desert-background-looped.png" id="1_tqr0m"]
 
 [node name="Background" type="Node2D"]
 script = ExtResource("1_3n6w3")
