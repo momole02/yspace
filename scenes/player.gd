@@ -1,17 +1,16 @@
 extends Area2D
 
+signal killed
 const INITIAL_H_FRAME = 2
 const laser = preload("res://scenes/laser.tscn")
+const explosion = preload("res://scenes/explosion.tscn")
 
 var h_frame = INITIAL_H_FRAME
 var v_frame = 0
 var h_frame_incr = 0
-
 var leaning_left = false 
 var leaning_right = false
-
-var speed = 100
-
+var speed = 150
 var can_shoot = true
 
 
@@ -46,5 +45,12 @@ func handle_shoot():
 		node.position = position
 		get_parent().add_child(node)
 		can_shoot = false
+		$ShootSFX.play()
 		
+func _on_area_entered(area):
+	queue_free()
+	var node = explosion.instantiate()
+	node.global_position = global_position
+	get_parent().add_child(node)
+	killed.emit()
 		

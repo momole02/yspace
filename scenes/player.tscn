@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://co6bprrss7fkl"]
+[gd_scene load_steps=5 format=3 uid="uid://co6bprrss7fkl"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_f5plu"]
 [ext_resource type="Texture2D" uid="uid://ck86a2hp0jsk0" path="res://ships/player/player.png" id="1_pbnmw"]
+[ext_resource type="AudioStream" uid="uid://0g874stwhkqt" path="res://sounds/laser_shoot.wav" id="3_2pove"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cihdq"]
 radius = 5.0
@@ -32,6 +33,10 @@ autostart = true
 wait_time = 0.3
 autostart = true
 
+[node name="ShootSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2pove")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="HFrameTimer" to="." method="_on_h_frame_timer_timeout"]
 [connection signal="timeout" from="VFrameTimer" to="." method="_on_v_frame_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

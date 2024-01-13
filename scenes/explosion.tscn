@@ -1,7 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://brnw8cnwcvoy5"]
+[gd_scene load_steps=7 format=3 uid="uid://brnw8cnwcvoy5"]
 
 [ext_resource type="Texture2D" uid="uid://s7ndp5ajyhvc" path="res://effects/shoot/explosion.png" id="1_k8pgg"]
 [ext_resource type="Script" path="res://scenes/explosion.gd" id="1_nwdsf"]
+[ext_resource type="AudioStream" uid="uid://coh7iuegsdfsc" path="res://sounds/explosion.wav" id="3_mfbb6"]
+
+[sub_resource type="Animation" id="Animation_dnigl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_u7rxv"]
 resource_name = "explode"
@@ -19,21 +35,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_dnigl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtjkg"]
 _data = {
 "RESET": SubResource("Animation_dnigl"),
@@ -44,7 +45,7 @@ _data = {
 script = ExtResource("1_nwdsf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_k8pgg")
 hframes = 5
 
@@ -52,5 +53,9 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_mtjkg")
 }
+
+[node name="ExplosionSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mfbb6")
+volume_db = -1.1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
