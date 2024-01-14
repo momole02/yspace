@@ -8,6 +8,11 @@ Le Space Shooter !
 
 ![Snapshot1](./docs/images/snapshot0.png)
 
+### Règles 
+
+- Touches fléchées, ou ZQSD ( ou WASD) pour le déplacement
+- Espace, ou clic gauche pour le tir
+
 ## Téléchargement
 
 Le jeu est disponible en téléchargement sous windows et linux. 
